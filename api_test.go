@@ -43,6 +43,8 @@ var (
 	sitesURL        = "/api/v1/sites"
 	attachmentsURL  = fmt.Sprintf("/api/v1/sites/%s/pages/%s/attachments", siteSlug, siteSlug)
 	attachmentURL   = fmt.Sprintf("/api/v1/sites/%s/pages/%s/attachments/%d", siteSlug, siteSlug, testID)
+	webhooksURL     = "/api/v1/webhooks"
+	webhookURL      = "/api/v1/webhooks/abc"
 )
 
 var testPeople = [][]byte{[]byte(`{
@@ -1126,6 +1128,60 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func webhookHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		err := json.NewEncoder(w).Encode(&webhookWrap{
+			Webhook: &Webhook{
+				ID:      "abc",
+				Version: 2,
+				URL:     "http://example.com",
+				Event:   "person_created",
+			},
+		})
+		if err != nil {
+			log.Fatal(err.Error())
+		}
+	case "DELETE":
+		w.WriteHeader(http.StatusNoContent)
+	default:
+		w.WriteHeader(http.StatusBadRequest)
+	}
+}
+
+func webhooksHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		webhooks := &Webhooks{
+			Results: []*Webhook{
+				&Webhook{
+					ID:      "abc",
+					Event:   "person_created",
+					URL:     "http://example.com",
+					Version: 2,
+				},
+			},
+		}
+
+		err := json.NewEncoder(w).Encode(webhooks)
+		if err != nil {
+			log.Fatal(err.Error())
+		}
+	case "POST":
+		ww := &webhookWrap{}
+		err := json.NewDecoder(r.Body).Decode(ww)
+		if err != nil {
+			log.Fatal(err.Error())
+		}
+		err = json.NewEncoder(w).Encode(ww)
+		if err != nil {
+			log.Fatal(err.Error())
+		}
+	default:
+		w.WriteHeader(http.StatusBadRequest)
+	}
+}
+
 func init() {
 	client, err := NewClient(slug, apiKey)
 	if err != nil {
@@ -1154,6 +1210,8 @@ func init() {
 	apiMux.HandleFunc(membershipsURL, membershipsHandler)
 	apiMux.HandleFunc(attachmentsURL, attachmentsHandler)
 	apiMux.HandleFunc(attachmentURL, attachmentHandler)
+	apiMux.HandleFunc(webhooksURL, webhooksHandler)
+	apiMux.HandleFunc(webhookURL, webhookHandler)
 
 	server := httptest.NewServer(apiMux)
 
@@ -1928,6 +1986,55 @@ func TestAttachmentDelete(t *testing.T) {
 	result := c.DeleteAttachment(siteSlug, siteSlug, testID, nil)
 	if result.HasError() {
 		t.Errorf("Unexpected error deleting attachment: %s", result.Error())
+		t.SkipNow()
+	}
+}
+
+func TestWebhooksGet(t *testing.T) {
+	webhooks, result := c.GetWebhooks(nil)
+	if result.HasError() {
+		t.Errorf("Unexpected error fetching webhooks: %s", result.Error())
+		t.SkipNow()
+	}
+
+	if webhooks == nil {
+		t.Error("Unexpected nil webhooks response - check API")
+	}
+}
+
+func TestWebhookCreate(t *testing.T) {
+	w := &Webhook{
+		URL:   "http://example.com",
+		Event: "person_created",
+	}
+	newW, result := c.CreateWebhook(w, nil)
+	if result.HasError() {
+		t.Errorf("Unexpected error creating webhook: %s", result.Error())
+		t.SkipNow()
+	}
+
+	if newW == nil {
+		t.Error("Unexpected nil webhook response")
+		t.SkipNow()
+	}
+}
+
+func TestWebhookGet(t *testing.T) {
+	a, result := c.GetWebhook("abc", nil)
+	if result.HasError() {
+		t.Errorf("Unexpected error retrieving webhook: %s", result.Error())
+		t.SkipNow()
+	}
+
+	if a == nil {
+		t.Error("Unexpected nil webhook response - check API")
+	}
+}
+
+func TestWebhookDelete(t *testing.T) {
+	result := c.DeleteWebhook("abc", nil)
+	if result.HasError() {
+		t.Errorf("Unexpected error deleting webhook: %s", result.Error())
 		t.SkipNow()
 	}
 }

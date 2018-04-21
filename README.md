@@ -3,7 +3,7 @@ Nationbuilder
 
 A work in progress implementation of a client for the Nationbuilder remote API.
 
-###Supported Endpoints
+### Supported Endpoints
 
 + Basic Pages
 + Blogs
@@ -13,10 +13,11 @@ A work in progress implementation of a client for the Nationbuilder remote API.
 + Attachments
 + People
 + Events (partial)
++ Webhooks
 
 with more to come over time.
 
-###Example Usage
+### Example Usage
 
 Instantiate a client and fetch blog posts:
 
