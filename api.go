@@ -87,7 +87,7 @@ func NewClient(slug string, key string) (*Client, error) {
 
 	return &Client{
 		Slug:    slug,
-		ApiKey:  key,
+		ApiKey:  key+"&fire_webhooks=false",
 		baseURL: nbURL,
 		c:       http.DefaultClient,
 	}, nil
