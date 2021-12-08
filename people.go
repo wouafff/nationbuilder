@@ -12,6 +12,7 @@ import (
 type Person struct {
 	ActiveCustomerExpiresAt     *Date    `json:"active_customer_expires_at,omitempty"`
 	ActiveCustomerStartedAt     *Date    `json:"active_customer_started_at,omitempty"`
+	AgeCategory                 int      `json:"age_category,omitempty"`
 	AuthorID                    int      `json:"author_id,omitempty"`
 	Author                      *Person  `json:"author,omitempty"`
 	AutoImportID                int      `json:"auto_import_id,omitempty"`
