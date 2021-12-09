@@ -28,7 +28,7 @@ type RSVPForm struct {
 
 // A Venue type for use within events
 type Venue struct {
-	Name    string   `json:"string,omitempty"`
+	Name    string   `json:"name,omitempty"`
 	Address *Address `json:"address,omitempty"`
 }
 
