@@ -72,6 +72,24 @@ func (n *Client) SetHTTPClient(c *http.Client) {
 	n.c = c
 }
 
+func NewClientForOauth(slug string) (*Client, error) {
+	u, err := url.Parse(fmt.Sprintf("https://%s.nationbuilder.com", slug))
+	if err != nil {
+		return nil, err
+	}
+
+	nbURL := &nationbuilderURL{
+		u: *u,
+	}
+
+	return &Client{
+		Slug:    slug,
+		ApiKey:  "",
+		baseURL: nbURL,
+		c:       http.DefaultClient,
+	}, nil
+}
+
 // Creates a new Nationbuilder Client
 func NewClient(slug string, key string) (*Client, error) {
 	u, err := url.Parse(fmt.Sprintf("https://%s.nationbuilder.com/api/%s", slug, apiVersion))
@@ -87,7 +105,7 @@ func NewClient(slug string, key string) (*Client, error) {
 
 	return &Client{
 		Slug:    slug,
-		ApiKey:  key+"&fire_webhooks=false",
+		ApiKey:  key + "&fire_webhooks=false",
 		baseURL: nbURL,
 		c:       http.DefaultClient,
 	}, nil
