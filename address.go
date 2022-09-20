@@ -5,8 +5,9 @@ type Address struct {
 	FirstLine   string `json:"address1,omitempty"`
 	SecondLine  string `json:"address2,omitempty"`
 	ThirdLine   string `json:"address3,omitempty"`
-	HouseNumber	string `json:"street_number,omitempty"`
-	Street		string `json:"street_name,omitempty"`
+	HouseNumber string `json:"street_number,omitempty"`
+	Street	    string `json:"street_name,omitempty"`
+	Addition    string `json:"addition,omitempty"`
 	City        string `json:"city,omitempty"`
 	State       string `json:"state,omitempty"`
 	ZIPCode     string `json:"zip,omitempty"`
