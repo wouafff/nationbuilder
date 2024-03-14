@@ -10,6 +10,7 @@ type Address struct {
 	Addition    string `json:"addition,omitempty"`
 	City        string `json:"city,omitempty"`
 	State       string `json:"state,omitempty"`
+	County      string `json:"county,omitempty"`
 	ZIPCode     string `json:"zip,omitempty"`
 	CountryCode string `json:"country_code,omitempty"`
 	Latitude    string `json:"lat,omitempty"`
