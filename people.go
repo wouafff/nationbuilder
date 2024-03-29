@@ -189,6 +189,7 @@ type Person struct {
 	SupportProbabilityScore          float32  `json:"support_probability_score,omitempty"`
 	SupraNationalDistrict            string   `json:"supranational_district,omitempty"`
 	Tags                             []string `json:"tags,omitempty"`
+	Township                         string   `json:"township,omitempty"`
 	TurnoutProbabilityScore          float32  `json:"turnout_probability_score,omitempty"`
 	TwitterDescription               string   `json:"twitter_description,omitempty"`
 	TwitterFollowersCount            int      `json:"twitter_followers_count,omitempty"`
@@ -205,6 +206,7 @@ type Person struct {
 	UserName                         string   `json:"username,omitempty"`
 	VanID                            string   `json:"van_id,omitempty"`
 	VillageDistrict                  string   `json:"village_district,omitempty"`
+	Ward                             string   `json:"ward,omitempty"`
 	WarningsCount                    int      `json:"warnings_count,omitempty"`
 	Website                          string   `json:"website,omitempty"`
 	WorkAddress                      *Address `json:"work_address,omitempty"`
