@@ -158,7 +158,7 @@ func (n *Client) sendRequest(request *apiRequest) *Result {
 	if debug {
 		log.Printf("StatusCode %d for %s to %s", resp.StatusCode, request.method, request.url)
 	}
-	fmt.Print(string(body))
+
 	return &Result{
 		StatusCode: resp.StatusCode,
 		Body:       body,
