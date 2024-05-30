@@ -211,6 +211,20 @@ type Person struct {
 	Website                          string   `json:"website,omitempty"`
 	WorkAddress                      *Address `json:"work_address,omitempty"`
 	WorkPhoneNumber                  string   `json:"work_phone_number,omitempty"`
+	DemoAgeRange                     string   `json:"demo_age_range,omitempty"`
+	DemoHouseholdIncomeTotal         string   `json:"demo_household_income_total,omitempty"`
+	DemoDonationCapacity             string   `json:"demo_donation_capacity,omitempty"`
+	DemoDonationCapacityRange        string   `json:"demo_donation_capacity_range,omitempty"`
+	DemoModeledEducation             string   `json:"demo_modeled_education,omitempty"`
+	DemoModeledEthnicity             string   `json:"demo_modeled_ethnicity,omitempty"`
+	DemoModeledReligion              string   `json:"demo_modeled_religion,omitempty"`
+	Vote2020General                  string   `json:"vote_2020_general,omitempty"`
+	Vote2018General                  string   `json:"vote_2018_general,omitempty"`
+	Vote2016General                  string   `json:"vote_2016_general,omitempty"`
+	DemoModeledParty                 string   `json:"demo_modeled_party,omitempty"`
+	DemoModeledSupportRep            string   `json:"demo_modeled_support_rep,omitempty"`
+	DemoModeledSupportDem            string   `json:"demo_modeled_support_dem,omitempty"`
+	DemoDma                          string   `json:"demo_dma,omitempty"`
 }
 
 //TwitterAddress                        *Address `json:"twitter_address,omitempty"` // TODO determine the actual type returned
