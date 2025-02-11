@@ -225,6 +225,11 @@ type Person struct {
 	DemoModeledSupportRep            string   `json:"demo_modeled_support_rep,omitempty"`
 	DemoModeledSupportDem            string   `json:"demo_modeled_support_dem,omitempty"`
 	DemoDma                          string   `json:"demo_dma,omitempty"`
+	MembershipRegistration           *Date    `json:"membership_registration,omitempty"`
+	MembershipValidity               *Date    `json:"membership_validity,omitempty"`
+	MembershipExpiry                 *Date    `json:"membership_expiry,omitempty"`
+	MembershipCounty                 string   `json:"membership_county,omitempty"`
+	MembershipStatus                 string   `json:"membership_status,omitempty"`
 }
 
 //TwitterAddress                        *Address `json:"twitter_address,omitempty"` // TODO determine the actual type returned
