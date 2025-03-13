@@ -230,6 +230,7 @@ type Person struct {
 	MembershipExpiry                 *Date    `json:"membership_expiry,omitempty"`
 	MembershipCounty                 string   `json:"membership_county,omitempty"`
 	MembershipStatus                 string   `json:"membership_status,omitempty"`
+	QlpNumber                        string   `json:"qlp_number,omitempty"`
 }
 
 //TwitterAddress                        *Address `json:"twitter_address,omitempty"` // TODO determine the actual type returned
